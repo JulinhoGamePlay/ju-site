@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundo Felino da Julia</title>
+    <!-- Google Fonts: Nunito for text, Pacifico for headers to give a cute aesthetic -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="heart-container"></div>
+    
+    <header class="glass-header">
+        <div class="logo">
+            <span class="paw-icon">🐾</span>
+            <h1>Para a Julia</h1>
+        </div>
+        <button id="theme-toggle" class="btn-icon" aria-label="Alternar Tema">
+            <span id="theme-icon">🌙</span>
+        </button>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2 class="title-primary">Bem-vinda ao <br> Mundo dos Gatinhos!</h2>
+                <p>Um espaço especial cheio de fofura e amor felino, feito exclusivamente para a maior fã de gatos: você!</p>
+                <button id="pet-button" class="btn-primary">
+                    Fazer Carinho 😽
+                </button>
+                <div id="meow-message" class="hidden">Miau! Você é a melhor! 💖</div>
+            </div>
+            <div class="hero-image">
+                <!-- Blob background behind image -->
+                <div class="blob shape1"></div>
+                <img src="assets/hero_cat.png" alt="Gatinho fofo e felpudo" class="floating">
+            </div>
+        </section>
+
+        <section class="gallery">
+            <h2 class="section-title">Galeria de Fofuras</h2>
+            <div class="cards-grid">
+                <div class="glass-card">
+                    <img src="assets/sleeping_cat.png" alt="Gatinho dormindo">
+                    <h3>Soninho Bom</h3>
+                    <p>Até roncando eles são perfeitos.</p>
+                </div>
+                <div class="glass-card flex-reverse">
+                    <img src="assets/playful_cat.png" alt="Gatinho brincando">
+                    <h3>Hora de Brincar</h3>
+                    <p>Caçando borboletas imaginárias.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="fun-facts glass-card">
+            <h2>Sabia Dessa? 💡</h2>
+            <div class="fact-box">
+                <p id="fact-text">Os gatos dormem cerca de 70% de suas vidas!</p>
+            </div>
+            <button id="next-fact" class="btn-secondary">Manda Mais!</button>
+        </section>
+
+        <!-- Sessão Calculadora -->
+        <section class="calculator glass-card" style="margin-top: 2rem;">
+            <h2 class="section-title" style="margin-top: 0;">Calculadora de Sachês (Juros) 💸</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">Descubra quanto seu investimento vai render em formato de fofura e dinheiro!</p>
+            <div class="calc-form">
+                <div class="input-group">
+                    <label for="calc-type">Tipo de Juros</label>
+                    <select id="calc-type">
+                        <option value="simples">Juros Simples</option>
+                        <option value="composto">Juros Compostos</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="calc-capital">Capital Inicial (R$)</label>
+                    <input type="number" id="calc-capital" placeholder="Ex: 1000" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label>Taxa de Juros (%)</label>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="number" id="calc-rate" placeholder="Ex: 2" step="0.01" style="flex: 1;">
+                        <select id="calc-rate-unit" style="flex: 1;">
+                            <option value="mes">Ao Mês (a.m.)</option>
+                            <option value="ano">Ao Ano (a.a.)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Tempo</label>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="number" id="calc-time" placeholder="Ex: 12" style="flex: 1;">
+                        <select id="calc-time-unit" style="flex: 1;">
+                            <option value="meses">Meses</option>
+                            <option value="anos">Anos</option>
+                        </select>
+                    </div>
+                </div>
+                <button id="calc-button" class="btn-primary" style="margin-top: 1rem; width: 100%;">Calcular Rentabilidade</button>
+            </div>
+            <div id="calc-result" class="hidden result-box">
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Feito com ❤️ e muitos ronrons para a Julia.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
