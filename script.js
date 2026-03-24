@@ -120,6 +120,10 @@ calcBtn.addEventListener('click', () => {
         return;
     }
 
+    // Helpers for Brazilian Number formatting
+    const formatBRL = (val) => val.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const formatRate = (val) => val.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 4 });
+
     let time = timeInput;
     let timeLabel = timeUnit; 
     let rateLabel = rateUnit === 'mes' ? 'ao mês' : 'ao ano';
@@ -133,7 +137,7 @@ calcBtn.addEventListener('click', () => {
     } else if (rateUnit === 'ano' && timeUnit === 'meses') {
         time = timeInput / 12;
         timeLabel = 'anos';
-        conversionHTML = `<li><em>Nota da Prô:</em> Convertemos o tempo para bater com a taxa! ${timeInput} meses = ${time.toFixed(2)} anos.</li>`;
+        conversionHTML = `<li><em>Nota da Prô:</em> Convertemos o tempo para bater com a taxa! ${timeInput} meses = ${formatBRL(time)} anos.</li>`;
     }
 
     const rate = rateInput / 100;
@@ -150,16 +154,16 @@ calcBtn.addEventListener('click', () => {
                 <h4>Como calculamos isso? (Professora Gatinha Explica 🎓🐱)</h4>
                 <p>A fórmula dos <strong>Juros Simples</strong> é: <code>J = C × i × t</code></p>
                 <ul>
-                    <li><strong>C (Capital):</strong> R$ ${capital.toFixed(2)}</li>
-                    <li><strong>i (Taxa):</strong> ${(rate * 100).toFixed(2)}% ${rateLabel} (ou ${rate.toFixed(4)} em decimal)</li>
-                    <li><strong>t (Tempo):</strong> ${time} ${timeLabel}</li>
+                    <li><strong>C (Capital):</strong> R$ ${formatBRL(capital)}</li>
+                    <li><strong>i (Taxa):</strong> ${formatRate(rate * 100)}% ${rateLabel} (ou ${formatRate(rate)} em decimal)</li>
+                    <li><strong>t (Tempo):</strong> ${formatBRL(time)} ${timeLabel}</li>
                     ${conversionHTML}
                 </ul>
                 <p>Substituindo na fórmula:<br>
-                <code>J = ${capital.toFixed(2)} × ${rate.toFixed(4)} × ${time.toFixed(2)}</code></p>
-                <p>O juros gerado é de <strong>R$ ${interest.toFixed(2)}</strong>.</p>
+                <code>J = ${formatBRL(capital)} × ${formatRate(rate)} × ${formatBRL(time)}</code></p>
+                <p>O juros gerado é de <strong>R$ ${formatBRL(interest)}</strong>.</p>
                 <p>Para o Montante Final (M), somamos o Capital + Juros:<br>
-                <code>M = ${capital.toFixed(2)} + ${interest.toFixed(2)} = R$ ${finalAmount.toFixed(2)}</code></p>
+                <code>M = ${formatBRL(capital)} + ${formatBRL(interest)} = R$ ${formatBRL(finalAmount)}</code></p>
             </div>
         `;
     } else {
@@ -171,17 +175,17 @@ calcBtn.addEventListener('click', () => {
                 <h4>Como calculamos isso? (Professora Gatinha Explica 🎓🐱)</h4>
                 <p>A fórmula dos <strong>Juros Compostos</strong> ("juros sobre juros") é: <code>M = C × (1 + i)<sup>t</sup></code></p>
                 <ul>
-                    <li><strong>C (Capital):</strong> R$ ${capital.toFixed(2)}</li>
-                    <li><strong>i (Taxa):</strong> ${(rate * 100).toFixed(2)}% ${rateLabel} (ou ${rate.toFixed(4)} em decimal)</li>
-                    <li><strong>t (Tempo):</strong> ${time} ${timeLabel}</li>
+                    <li><strong>C (Capital):</strong> R$ ${formatBRL(capital)}</li>
+                    <li><strong>i (Taxa):</strong> ${formatRate(rate * 100)}% ${rateLabel} (ou ${formatRate(rate)} em decimal)</li>
+                    <li><strong>t (Tempo):</strong> ${formatBRL(time)} ${timeLabel}</li>
                     ${conversionHTML}
                 </ul>
                 <p>Substituindo na fórmula:<br>
-                <code>M = ${capital.toFixed(2)} × (1 + ${rate.toFixed(4)})<sup>${time.toFixed(2)}</sup></code>
+                <code>M = ${formatBRL(capital)} × (1 + ${formatRate(rate)})<sup>${formatBRL(time)}</sup></code>
                 </p>
-                <p>O Montante (Capital + Juros) no final será de <strong>R$ ${finalAmount.toFixed(2)}</strong>.</p>
+                <p>O Montante (Capital + Juros) no final será de <strong>R$ ${formatBRL(finalAmount)}</strong>.</p>
                 <p>Para achar apenas os juros gerados, fazemos Montante - Capital:<br>
-                <code>J = R$ ${finalAmount.toFixed(2)} - R$ ${capital.toFixed(2)} = R$ ${interest.toFixed(2)}</code></p>
+                <code>J = R$ ${formatBRL(finalAmount)} - R$ ${formatBRL(capital)} = R$ ${formatBRL(interest)}</code></p>
             </div>
         `;
     }
@@ -190,13 +194,13 @@ calcBtn.addEventListener('click', () => {
     calcResult.classList.remove('hidden');
     calcResult.innerHTML = `
         <h3>Resultado Financeiro Festivo 🎉</h3>
-        <p><strong>Total Investido:</strong> R$ ${capital.toFixed(2)}</p>
-        <p><strong>Juros Rendidos:</strong> R$ ${interest.toFixed(2)}</p>
+        <p><strong>Total Investido:</strong> R$ ${formatBRL(capital)}</p>
+        <p><strong>Juros Rendidos:</strong> R$ ${formatBRL(interest)}</p>
         <p style="font-size: 1.3rem; margin-top: 1rem; color: var(--primary-color); font-weight: bold;">
-            Montante Final: R$ ${finalAmount.toFixed(2)}
+            Montante Final: R$ ${formatBRL(finalAmount)}
         </p>
         ${explanationHTML}
-        <p style="margin-top: 1.5rem; opacity: 0.8; font-weight: bold;">Isso daria pra comprar aproximadamente ${Math.floor(finalAmount / 3)} sachês deliciosos (se cada um for R$3,00)! 😻</p>
+        <p style="margin-top: 1.5rem; opacity: 0.8; font-weight: bold;">Isso daria pra comprar aproximadamente ${Math.floor(finalAmount / 3).toLocaleString('pt-BR')} sachês deliciosos (se cada um for R$3,00)! 😻</p>
     `;
     
     // Tiny bounce effect on the calc card
